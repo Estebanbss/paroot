@@ -19,7 +19,7 @@ export class ShortUrlService {
   async getShortUrl(url: any) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:4200/'
+      'Access-Control-Allow-Origin': 'https://estebanbss.github.io/'
     });
     const options = { headers: headers };
     return await firstValueFrom(this.http.post(`${this.api}`, url, options));
@@ -28,7 +28,7 @@ export class ShortUrlService {
   async getUrlById(id: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:4200/'
+      'Access-Control-Allow-Origin': 'https://estebanbss.github.io/'
     });
     const options = { headers: headers };
     return await firstValueFrom(this.http.get(`${this.api}/${id}`, options));
@@ -37,7 +37,7 @@ export class ShortUrlService {
   async getLongUrl(shortUrl: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:4200/'
+      'Access-Control-Allow-Origin': 'https://estebanbss.github.io/'
     });
     const options = { headers: headers };
     return await firstValueFrom(this.http.get(`${this.api}/${shortUrl}`, options));
@@ -46,7 +46,7 @@ export class ShortUrlService {
   async updateUrl(url:any){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:4200/'
+      'Access-Control-Allow-Origin': 'https://estebanbss.github.io/'
     });
     const options = { headers: headers };
     return await firstValueFrom(this.http.put(`${this.api}/${url.Id}`, url, options));
@@ -57,6 +57,7 @@ export class ShortUrlService {
   }
 
   getBaseUrl() {
+    console.log(environment.production)
     return environment.production ? 'https://paroot.somee.com/' : '/api';
   }
 
