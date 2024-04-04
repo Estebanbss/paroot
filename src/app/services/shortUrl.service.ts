@@ -58,7 +58,7 @@ export class ShortUrlService {
 
   getBaseUrl() {
     console.log(environment.production)
-    return environment.production ? 'https://paroot.somee.com/' : '/api';
+    return environment.production ? 'https://paroot.somee.com' : '/api';
   }
 
 
