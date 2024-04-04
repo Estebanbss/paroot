@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://paroot.somee.com/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/api" : ""}
+  }
+
+}

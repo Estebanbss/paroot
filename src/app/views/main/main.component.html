@@ -2,72 +2,194 @@
 
 <div class="w-full   h-full z-0 bg-noise absolute"></div>
 <div class="w-full   min-h-[calc(100vh_-_64px)] p-4">
-  <div class="max-w-[1280px] w-full mx-auto relative">
+  <div  (keydown.esc)="finishStat()"  class="max-w-[1280px] w-full mx-auto relative">
     <div id="alertBox" class=" text-white w-[240px] absolute  left-[50%] font-semibold -translate-x-[50%] rounded-lg px-4 py-2 h-[48px] hidden flex-row gap-2 justify-center items-center pointer-events-none">
-      <svg class="fill-white pointer-events-none" *ngIf="alert() === 'Invalid URL'" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z"/></svg>
+      <svg class="pointer-events-none dont" class="fill-white pointer-events-none" *ngIf="alert() === 'Invalid URL'" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z"/></svg>
 
-      <svg class="fill-white pointer-events-none" *ngIf="alert() === 'Link copied!'"  xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+      <svg class="pointer-events-none dont" class="fill-white pointer-events-none" *ngIf="alert() === 'Link copied!'"  xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
 
       {{alert()}}
     </div>
     <h2 class="py-2 mx-auto flex justify-center text-center text-lg font-black text-green-800 font-mono">Shorten links, make QR codes, easy as a click!</h2>
 
     <div class="w-full mt-2  top-[3px] z-50 flex justify-center relative ">
-      <button (click)="chooseButton.set(page)" *ngFor="let page of buttons" [ngClass]="[chooseButton() === page ? 'p-2 px-5 rounded-t-lg bg-white border-b-0 border-[3px] flex flex-row gap-1' : 'p-2 px-5 border-b-0 border-[3px] border-transparent rounded-t-lg flex flex-row gap-1' ]">
-        <svg *ngIf="page === 'Short Link'" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none"><path d="M6.4 10.6C5.8 9.9 5.5 9.1 5.5 8.3C5.5 7.4 5.8 6.6 6.5 6C7.7 4.8 9.9 4.8 11.1 6L13.3 8.2C13.7 8.6 14.3 8.6 14.7 8.2C15.1 7.8 15.1 7.2 14.7 6.8L12.5 4.5C11.5 3.6 10.1 3 8.7 3C7.3 3 6 3.6 5 4.5C4 5.5 3.5 6.9 3.5 8.3C3.5 9.7 4 11 5 12L7.2 14.2C7.4 14.4 7.7 14.5 7.9 14.5C8.1 14.5 8.4 14.4 8.6 14.2C9 13.8 9 13.2 8.6 12.8L6.4 10.6Z" fill="#36383B"></path><path d="M20 12L17.8 9.8C17.4 9.4 16.8 9.4 16.4 9.8C16 10.2 16 10.8 16.4 11.2L18.6 13.5C19.2 14.1 19.6 14.9 19.6 15.8C19.6 16.7 19.3 17.5 18.6 18.1C17.3 19.4 15.3 19.4 14 18.1L11.8 15.9C11.4 15.5 10.8 15.5 10.4 15.9C10 16.3 10 16.9 10.4 17.3L12.6 19.5C13.6 20.5 15 21 16.3 21C17.6 21 19 20.5 20 19.5C21 18.5 21.5 17.2 21.5 15.8C21.5 14.3 21 13 20 12Z" fill="#36383B"></path><path d="M15.2 14.7C15 14.9 14.8 15 14.5 15C14.2 15 14 14.9 13.8 14.7L9.8 10.7C9.4 10.3 9.4 9.7 9.8 9.3C10.2 8.9 10.8 8.9 11.2 9.3L15.2 13.3C15.6 13.7 15.6 14.3 15.2 14.7Z" fill="#36383B"></path></svg>
-        <svg *ngIf="page === 'Qr Code'" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 11H9.5C10.6 11 11.5 10.1 11.5 9V5C11.5 3.9 10.6 3 9.5 3H5.5C4.4 3 3.5 3.9 3.5 5V9C3.5 10.1 4.4 11 5.5 11ZM5.5 5H9.5V9H5.5V5ZM5.5 21H9.5C10.6 21 11.5 20.1 11.5 19V15C11.5 13.9 10.6 13 9.5 13H5.5C4.4 13 3.5 13.9 3.5 15V19C3.5 20.1 4.4 21 5.5 21ZM5.5 15H9.5V19H5.5V15ZM13.5 9V5C13.5 3.9 14.4 3 15.5 3H19.5C20.6 3 21.5 3.9 21.5 5V9C21.5 10.1 20.6 11 19.5 11H15.5C14.4 11 13.5 10.1 13.5 9ZM15.5 9H19.5V5H15.5V9ZM21.5 20.5V19.5C21.5 19.22 21.28 19 21 19H20C19.72 19 19.5 19.22 19.5 19.5V20.5C19.5 20.78 19.72 21 20 21H21C21.28 21 21.5 20.78 21.5 20.5ZM13.5 14.5V13.5C13.5 13.22 13.72 13 14 13H15C15.28 13 15.5 13.22 15.5 13.5V14.5C15.5 14.78 15.28 15 15 15H14C13.72 15 13.5 14.78 13.5 14.5ZM17 15H16C15.72 15 15.5 15.22 15.5 15.5V16.5C15.5 16.78 15.72 17 16 17H17C17.28 17 17.5 16.78 17.5 16.5V15.5C17.5 15.22 17.28 15 17 15ZM13.5 18.5V17.5C13.5 17.22 13.72 17 14 17H15C15.28 17 15.5 17.22 15.5 17.5V18.5C15.5 18.78 15.28 19 15 19H14C13.72 19 13.5 18.78 13.5 18.5ZM16 21H17C17.28 21 17.5 20.78 17.5 20.5V19.5C17.5 19.22 17.28 19 17 19H16C15.72 19 15.5 19.22 15.5 19.5V20.5C15.5 20.78 15.72 21 16 21ZM19 19H18C17.72 19 17.5 18.78 17.5 18.5V17.5C17.5 17.22 17.72 17 18 17H19C19.28 17 19.5 17.22 19.5 17.5V18.5C19.5 18.78 19.28 19 19 19ZM19 13H18C17.72 13 17.5 13.22 17.5 13.5V14.5C17.5 14.78 17.72 15 18 15H19C19.28 15 19.5 14.78 19.5 14.5V13.5C19.5 13.22 19.28 13 19 13ZM21 17H20C19.72 17 19.5 16.78 19.5 16.5V15.5C19.5 15.22 19.72 15 20 15H21C21.28 15 21.5 15.22 21.5 15.5V16.5C21.5 16.78 21.28 17 21 17Z" fill="#36383B"></path></svg>
+      <button (click)="chooseButton.set(page); $event.stopPropagation()" *ngFor="let page of buttons" [ngClass]="[chooseButton() === page ? 'p-2 px-5 rounded-t-lg bg-white border-b-0 border-[3px] flex flex-row gap-1' : 'p-2 px-5 border-b-0 border-[3px] border-transparent rounded-t-lg flex flex-row gap-1' ]">
+        <svg class="pointer-events-none dont" *ngIf="page === 'Short Link'" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none"><path d="M6.4 10.6C5.8 9.9 5.5 9.1 5.5 8.3C5.5 7.4 5.8 6.6 6.5 6C7.7 4.8 9.9 4.8 11.1 6L13.3 8.2C13.7 8.6 14.3 8.6 14.7 8.2C15.1 7.8 15.1 7.2 14.7 6.8L12.5 4.5C11.5 3.6 10.1 3 8.7 3C7.3 3 6 3.6 5 4.5C4 5.5 3.5 6.9 3.5 8.3C3.5 9.7 4 11 5 12L7.2 14.2C7.4 14.4 7.7 14.5 7.9 14.5C8.1 14.5 8.4 14.4 8.6 14.2C9 13.8 9 13.2 8.6 12.8L6.4 10.6Z" fill="#36383B"></path><path d="M20 12L17.8 9.8C17.4 9.4 16.8 9.4 16.4 9.8C16 10.2 16 10.8 16.4 11.2L18.6 13.5C19.2 14.1 19.6 14.9 19.6 15.8C19.6 16.7 19.3 17.5 18.6 18.1C17.3 19.4 15.3 19.4 14 18.1L11.8 15.9C11.4 15.5 10.8 15.5 10.4 15.9C10 16.3 10 16.9 10.4 17.3L12.6 19.5C13.6 20.5 15 21 16.3 21C17.6 21 19 20.5 20 19.5C21 18.5 21.5 17.2 21.5 15.8C21.5 14.3 21 13 20 12Z" fill="#36383B"></path><path d="M15.2 14.7C15 14.9 14.8 15 14.5 15C14.2 15 14 14.9 13.8 14.7L9.8 10.7C9.4 10.3 9.4 9.7 9.8 9.3C10.2 8.9 10.8 8.9 11.2 9.3L15.2 13.3C15.6 13.7 15.6 14.3 15.2 14.7Z" fill="#36383B"></path></svg>
+        <svg class="pointer-events-none dont" *ngIf="page === 'Qr Code'" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 11H9.5C10.6 11 11.5 10.1 11.5 9V5C11.5 3.9 10.6 3 9.5 3H5.5C4.4 3 3.5 3.9 3.5 5V9C3.5 10.1 4.4 11 5.5 11ZM5.5 5H9.5V9H5.5V5ZM5.5 21H9.5C10.6 21 11.5 20.1 11.5 19V15C11.5 13.9 10.6 13 9.5 13H5.5C4.4 13 3.5 13.9 3.5 15V19C3.5 20.1 4.4 21 5.5 21ZM5.5 15H9.5V19H5.5V15ZM13.5 9V5C13.5 3.9 14.4 3 15.5 3H19.5C20.6 3 21.5 3.9 21.5 5V9C21.5 10.1 20.6 11 19.5 11H15.5C14.4 11 13.5 10.1 13.5 9ZM15.5 9H19.5V5H15.5V9ZM21.5 20.5V19.5C21.5 19.22 21.28 19 21 19H20C19.72 19 19.5 19.22 19.5 19.5V20.5C19.5 20.78 19.72 21 20 21H21C21.28 21 21.5 20.78 21.5 20.5ZM13.5 14.5V13.5C13.5 13.22 13.72 13 14 13H15C15.28 13 15.5 13.22 15.5 13.5V14.5C15.5 14.78 15.28 15 15 15H14C13.72 15 13.5 14.78 13.5 14.5ZM17 15H16C15.72 15 15.5 15.22 15.5 15.5V16.5C15.5 16.78 15.72 17 16 17H17C17.28 17 17.5 16.78 17.5 16.5V15.5C17.5 15.22 17.28 15 17 15ZM13.5 18.5V17.5C13.5 17.22 13.72 17 14 17H15C15.28 17 15.5 17.22 15.5 17.5V18.5C15.5 18.78 15.28 19 15 19H14C13.72 19 13.5 18.78 13.5 18.5ZM16 21H17C17.28 21 17.5 20.78 17.5 20.5V19.5C17.5 19.22 17.28 19 17 19H16C15.72 19 15.5 19.22 15.5 19.5V20.5C15.5 20.78 15.72 21 16 21ZM19 19H18C17.72 19 17.5 18.78 17.5 18.5V17.5C17.5 17.22 17.72 17 18 17H19C19.28 17 19.5 17.22 19.5 17.5V18.5C19.5 18.78 19.28 19 19 19ZM19 13H18C17.72 13 17.5 13.22 17.5 13.5V14.5C17.5 14.78 17.72 15 18 15H19C19.28 15 19.5 14.78 19.5 14.5V13.5C19.5 13.22 19.28 13 19 13ZM21 17H20C19.72 17 19.5 16.78 19.5 16.5V15.5C19.5 15.22 19.72 15 20 15H21C21.28 15 21.5 15.22 21.5 15.5V16.5C21.5 16.78 21.28 17 21 17Z" fill="#36383B"></path></svg>
         {{page}}
       </button>
       </div>
-    <div class=" md:max-w-[700px] z-40 relative  w-full mx-auto  bg-white shadow-lg rounded-xl border-[3px] p-3 px-5">
+    <div  class=" md:max-w-[700px] z-40 relative  w-full mx-auto  bg-white shadow-lg rounded-xl border-[3px] p-3 px-5">
 
-      <div *ngIf="chooseButton() === 'Short Link'">
-        <h3 class="font-bold text-2xl font-sans mb-3">Shorten a long link</h3>
-        <p class="font-medium text-lg font-sans ">Paste a long URL</p>
-        <form class="w-full" (ngSubmit)="getURL()" [formGroup]="urlLong!">
+      <div class="relative dont" *ngIf="chooseButton() === 'Short Link'">
 
-        <div class="w-full flex flex-col md:flex-row gap-2 items-center justify-center">
-          <input id="urlInput" placeholder="Example: http://super-hiper-mega-long-link.com/shorten-it" autofocus autocapitalize="false" spellcheck="false" class="w-full focus:bg-white outline-1 focus:outline-green-600 h-10 border-2 p-2 my-2 rounded-md placeholder:px-2"  formControlName="url" required>
-          <button class="px-4 h-[38px] min-w-[130px] rounded-md bg-green-800 text-white font-bold">Shorten URL</button>
-        </div>
-        </form>
-        <div *ngIf="urls.length !== 0" class="my-2 w-full flex flex-col gap-2 ">
-          <div *ngFor="let url of urls" class="min-h-10 bg-white rounded-md w-full border-2 p-2 flex flex-col md:flex-row items-center overflow-hidden">
-            <span class="max-w-[300px] md:max-w-[270px]  w-full md:w-auto overflow-hidden text-ellipsis flex mr-auto md:mr-2">
-              {{url.originalUrl}}
-            </span>
-            <span class="mr-auto md:ml-auto   max-w-[245px]  min-w-[240px]  md:mr-5 md:max-w-full overflow-hidden text-ellipsis text-blue-700 font-semibold underline">
-              <a class="w-full" [attr.href]="'https://paroot.somee.com/' + url.shortUrl" target="_blank">https://paroot.somee.com/{{url.shortUrl}}</a>
+        <div class="relative" *ngIf="!statBool()">
+          <h3 class="font-bold text-2xl font-sans mb-3">Shorten a long link</h3>
+          <p class="font-medium text-lg font-sans ">Paste a long URL</p>
+          <form class="w-full" (ngSubmit)="getURL()" [formGroup]="urlLong!">
 
-            </span>
-            <div class="max-w-[96px] flex flex-row">
-              <span (click)="go()" class="aspect-square w-[32px] fill-gray-500 cursor-pointer hover:bg-green-700 hover:bg-opacity-15 hover:fill-green-700 p-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" class="injected-svg Icon--sm v-middle" data-src="https://dashboard-cdn.rebrandly.com/styleguide-assets/icons/ic-qrcode.svg" xmlns:xlink="http://www.w3.org/1999/xlink" ><g><g><path d="M32 41v-2h3v5H23v-3h9zM4 24v-3h3v3H4zm20 0v-3h3v3h-3zM21 7V4h6v3h-6zm0 6v-3h6v3h-6zm0 6v-3h6v3h-6zm0-9V7h3v3h-3zm3 6v-3h3v3h-3zm9 11v-3h3v3h-3zm-3-3v-3h6v3h-6zm-9 6v-3h3v3h-3zm6 0v-3h3v3h-3zm-3 3v-3h3v3h-3zm-3 3v-3h3v3h-3zm0 3v-3h6v3h-6zm6-3v-3h3v3h-3zm11 8v-3h3v3h-3zm3-3v-3h3v3h-3zm0-5v-3h3v3h-3zm0-12v-3h3v3h-3zm-3 6v-3h3v3h-3zm-8 3v-3h11v3H30zm8-6v-3h6v3h-6zm-3 9v-3h3v3h-3zm0 3v-3h6v3h-6zM7 27v-3h3v3H7zm3-3v-3h6v3h-6zm3 3v-3h11v3H13zM7 7v8h8V7H7zm26 0v8h8V7h-8zM7 33v8h8v-8H7zM18 4v14H4V4h14zm26 0v14H30V4h14zM18 30v14H4V30h14zm-8-20h2v2h-2v-2zm26 0h2v2h-2v-2zM10 36h2v2h-2v-2z"></path></g></g></svg>
+          <div class="w-full flex flex-col md:flex-row gap-2 items-center justify-center">
+            <input id="urlInput" placeholder="Example: http://super-hiper-mega-long-link.com/shorten-it" autofocus autocapitalize="false" spellcheck="false" class="w-full focus:bg-white outline-1 focus:outline-green-600 h-10 border-2 p-2 my-2 rounded-md placeholder:px-2"  formControlName="url" required>
+            <button class="px-4 h-[38px] min-w-[130px] rounded-md bg-green-800 text-white font-bold">
+              @if(loading()){
+                <svg class="pointer-events-none dont" aria-hidden="true" class="w-8 h-8 animate-spin mx-auto p-1  fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                  <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+              </svg>
+            }@else{
+              Shorten URL
+            }
+            </button>
+          </div>
+          </form>
+          <div *ngIf="urls?.length !== 0" class="my-2 w-full flex flex-col gap-2 ">
+            <div *ngFor="let url of urls" class="min-h-10 bg-white rounded-md w-full border-2 p-2 flex flex-col md:flex-row items-center overflow-hidden">
+              <span class="  w-full md:w-auto overflow-hidden text-ellipsis flex mr-auto md:mr-2 line-clamp-1 whitespace-nowrap">
+                {{url.originalUrl}}
               </span>
-              <span (click)="go()"class="aspect-square w-[32px] fill-gray-500 cursor-pointer hover:bg-green-700 hover:bg-opacity-15 hover:fill-green-700 p-1 ">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"  data-src="https://dashboard-cdn.rebrandly.com/styleguide-assets/icons/ic-stats.svg" ><g><g><path d="M23 40h2c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1v30c0 .55.45 1 1 1zm-10 0h2c.55 0 1-.45 1-1V25c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1zm19-23v22c0 .55.45 1 1 1h2c.55 0 1-.45 1-1V17c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1z"></path></g></g></svg>
+              <span (click)="$event.stopPropagation(); clickToShortUrl(url)" class="mr-auto md:ml-auto   max-w-[245px]  min-w-[242px]  md:mr-5 md:max-w-full overflow-hidden text-ellipsis text-blue-700 font-semibold underline cursor-pointer">
+                  https://paroot.somee.com/{{url.shortUrl}}
+
               </span>
-              <span (click)="copyUrl(url)" class="aspect-square fill-gray-500 cursor-pointer hover:bg-green-700 hover:bg-opacity-15 hover:fill-green-700 p-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"  data-src="https://dashboard-cdn.rebrandly.com/styleguide-assets/icons/ic-copy.svg" ><g><g><path d="M28 8H16c-2.2 0-4 1.8-4 4v20h2c0-11.3 0-17.64 0-19 0-1 2-3 3-3 1.33 0 5 0 11 0V8zm4.8 4H19.2c-1.76 0-3.2 1.6-3.2 3.56v20.88C16 38.4 17.44 40 19.2 40h13.6c1.76 0 3.2-1.6 3.2-3.56V15.56C36 13.6 34.56 12 32.8 12z"></path></g></g></svg>
+              <div class="max-w-[96px] flex flex-row">
+                <span (click)="$event.stopPropagation(); startStat(url);"class="aspect-square w-[32px] fill-gray-500 cursor-pointer hover:bg-green-700 hover:bg-opacity-15 hover:fill-green-700 p-1 ">
+                  <svg class="pointer-events-none dont" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"  data-src="https://dashboard-cdn.rebrandly.com/styleguide-assets/icons/ic-stats.svg" ><g><g><path d="M23 40h2c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1v30c0 .55.45 1 1 1zm-10 0h2c.55 0 1-.45 1-1V25c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1zm19-23v22c0 .55.45 1 1 1h2c.55 0 1-.45 1-1V17c0-.55-.45-1-1-1h-2c-.55 0-1 .45-1 1z"></path></g></g></svg>
+                </span>
+                <span (click)="$event.stopPropagation(); copyUrl(url)" class="aspect-square fill-gray-500 cursor-pointer hover:bg-green-700 hover:bg-opacity-15 hover:fill-green-700 p-1">
+                  <svg class="pointer-events-none dont" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"  data-src="https://dashboard-cdn.rebrandly.com/styleguide-assets/icons/ic-copy.svg" ><g><g><path d="M28 8H16c-2.2 0-4 1.8-4 4v20h2c0-11.3 0-17.64 0-19 0-1 2-3 3-3 1.33 0 5 0 11 0V8zm4.8 4H19.2c-1.76 0-3.2 1.6-3.2 3.56v20.88C16 38.4 17.44 40 19.2 40h13.6c1.76 0 3.2-1.6 3.2-3.56V15.56C36 13.6 34.56 12 32.8 12z"></path></g></g></svg>
+                </span>
+              </div>
+              <span (click)="$event.stopPropagation(); deleteUrlFromLocalStorage(url)" class="fill-gray-500 aspect-square cursor-pointer w-[24px] h-[24px] hover:fill-red-500 mx-2">
+                <svg class="pointer-events-none dont" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 48 48" version="1.1" class="injected-svg Icon--xsmall v-middle" data-src="https://dashboard-cdn.rebrandly.com/styleguide-assets/icons/ic-cross.svg" >
+                  <defs></defs>
+                  <g id="icons/ic-cross" stroke="none" stroke-width="1">
+                      <g id="Shape">
+                          <polygon points="42 9.62571429 38.3742857 6 24 20.3742857 9.62571429 6 6 9.62571429 20.3742857 24 6 38.3742857 9.62571429 42 24 27.6257143 38.3742857 42 42 38.3742857 27.6257143 24"></polygon>
+                      </g>
+                  </g>
+              </svg>
               </span>
             </div>
-            <span (click)="deleteUrlFromLocalStorage(url)" class="fill-gray-500 aspect-square cursor-pointer w-[24px] h-[24px] hover:fill-red-500">
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 48 48" version="1.1" class="injected-svg Icon--xsmall v-middle" data-src="https://dashboard-cdn.rebrandly.com/styleguide-assets/icons/ic-cross.svg" >
-                <defs></defs>
-                <g id="icons/ic-cross" stroke="none" stroke-width="1">
-                    <g id="Shape">
-                        <polygon points="42 9.62571429 38.3742857 6 24 20.3742857 9.62571429 6 6 9.62571429 20.3742857 24 6 38.3742857 9.62571429 42 24 27.6257143 38.3742857 42 42 38.3742857 27.6257143 24"></polygon>
-                    </g>
-                </g>
-            </svg>
-            </span>
-          </div>
 
+          </div>
         </div>
+
+        <div (click)="$event.stopPropagation()" class="min-h-[300px] dont flex flex-col" *ngIf="statBool()">
+          <span (click)="$event.stopPropagation(); finishStat()" class="absolute top-[1px] -left-1 cursor-pointer fill-green-800">
+            <svg class="pointer-events-none dont" xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg>
+          </span>
+          <h3 class="font-bold md:text-xl font-sans my-2  ml-6 text-green-800">paroot.somee.com/{{selectUrl.shortUrl}}</h3>
+          <span class="fill-green-800 flex flex-row gap-2 font-semibold text-base text-green-700">
+            <svg class="pointer-events-none dont" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" data-src="https://dashboard-cdn.rebrandly.com/styleguide-assets/icons/ic-calendar.svg" xmlns:xlink="http://www.w3.org/1999/xlink" ><g><g><path d="M18 22h-4v4h4v-4zm8 0h-4v4h4v-4zm8 0h-4v4h4v-4zm4-12h-2V6h-4v4H16V6h-4v4h-2c-2.22 0-3.98 1.8-3.98 4L6 38c0 2.2 1.78 4 4 4h28c2.2 0 4-1.8 4-4V14c0-2.2-1.8-4-4-4zm0 28H10V18h28v20z"></path></g></g></svg>
+            {{selectUrl.createdAt}}
+          </span>
+        <div class="border-b-2 border-green-800 my-2"></div>
+          <span class="fill-green-800 flex flex-row font-bold items-center text-green-700">
+            <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"><path d="M468-240q-96-5-162-74t-66-166q0-100 70-170t170-70q97 0 166 66t74 162l-84-25q-13-54-56-88.5T480-640q-66 0-113 47t-47 113q0 57 34.5 100t88.5 56l25 84ZM821-60 650-231 600-80 480-480l400 120-151 50 171 171-79 79Z"/></svg>
+            {{selectUrl.clicks}}
+          </span>
+          <span>
+            <strong class="text-green-800">Last click:</strong> {{selectUrl.lastClickedAt === null ? 'Never' : selectUrl.lastClickedAt}}
+          </span>
+          <span>
+            <strong class="text-green-800">Last Country:</strong> {{selectUrl.lastClickedCountry === null ? 'Never' : selectUrl.lastClickedCountry}}
+          </span>
+        </div>
+
       </div>
 
       <div *ngIf="chooseButton() === 'Qr Code'">
-        b
+        <h3 class="font-bold text-2xl font-sans mb-3">QR Code Generator</h3>
+        <div class="ml-auto flex px-4 flex-col justify-center items-center border-2 drop-shadow-sm  rounded-lg">
+          <div class="max-w-[200px] min-w-[200px] min-h-[200px] max-h-[200px] overflow-hidden flex flex-row justify-center">
+            <div class="flex flex-col items-center justify-center w-full h-full">
+              <qrcode
+              (qrCodeURL)="onQrCodeURLChange($event)"
+                          #parent class="max-w-full max-h-full flex flex-col justify-center items-center"
+                [qrdata]="textQr"
+                [width]="width"
+                [errorCorrectionLevel]="'M'"
+                [elementType]="type"
+                [colorDark]="foreGroundColor"
+                [colorLight]="backGroundColor"
+                [margin]="margin"
+                [scale]="1"
+                [allowEmptyString]="true"
+              >
+              </qrcode>
+
+            </div>
+          </div>
+        <div class="mt-10 flex flex-col w-full gap-2">
+          <p class="text-xs font-semibold">Text</p>
+            <input class="border-2 rounded-md p-1 w-full focus:outline-green-600" [(ngModel)]="textQr">
+        </div>
+        <div class="mt-10 flex flex-row w-full gap-2">
+          <div class="w-[50%] min-h-[40px]">
+            <p class="text-xs font-semibold mb-2">Background Color</p>
+            <div class="relative border-2 rounded-md  w-full">
+              <span [(colorPicker)]="backGroundColor" class="aspect-square cursor-pointer h-full w-auto absolute right-0 flex justify-center items-center">
+                <svg width="20px" xmlns="http://www.w3.org/200/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 16 16" version="1.1" class="injected-svg Icon--xsmall v-middle" data-src="https://dashboard-cdn.rebrandly.com/styleguide-assets/icons/ic-color-picker.svg" fill="#909398">
+                  <g id="Page-1" stroke="none" stroke-width="1">
+                      <g id="instabrandly-05" transform="translate(-1277.000000, -667.000000)">
+                          <g id="input-field" transform="translate(1174.000000, 569.000000)">
+                              <g id="Picker-01" transform="translate(103.000000, 28.000000)">
+                                  <path d="M13.7365854,70 C13.1121951,70 12.5658537,70.2341463 12.1756098,70.6243902 L12.1756098,70.6243902 L8.85853659,73.902439 L7.64878049,73.4731707 L6.16585366,74.9560976 L6.98536585,75.7756098 L0.663414634,82.1365854 L0,84.6731707 C0,85.297561 0.663414634,85.9609756 1.28780488,85.9609756 L3.82439024,85.3365854 L10.1853659,78.9756098 L11.004878,79.795122 L12.4878049,78.3121951 L12.0585366,77.102439 L15.297561,73.8634146 L15.297561,73.8634146 C15.6878049,73.4731707 15.9609756,72.8878049 15.9609756,72.302439 C15.9609756,71.0146341 14.9463415,70 13.7365854,70 L13.7365854,70 Z M7.72682927,76.4390244 L9.48292683,78.195122 L3.31707317,84.4 L1.24878049,84.9463415 C1.24878049,84.9463415 1.17073171,84.9073171 1.09268293,84.8292683 C1.01463415,84.7512195 1.01463415,84.7121951 1.01463415,84.7121951 L1.56097561,82.6439024 L7.72682927,76.4390244 Z" id="XMLID_7_-299"></path>
+                              </g>
+                          </g>
+                      </g>
+                  </g>
+              </svg>
+              </span>
+              <input class=" focus:outline-green-600 p-1 w-full" (input)="onBColorChange(backGroundColor)" [(ngModel)]="backGroundColor">
+            </div>
+          </div>
+          <div class="w-[50%]  min-h-[40px]">
+            <p class="text-xs font-semibold mb-2">Foreground Color</p>
+            <div class="relative border-2 rounded-md  w-full">
+              <span [(colorPicker)]="foreGroundColor" class="aspect-square cursor-pointer h-full w-auto absolute right-0 flex justify-center items-center">
+                <svg width="20px" xmlns="http://www.w3.org/200/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 16 16" version="1.1" class="injected-svg Icon--xsmall v-middle" data-src="https://dashboard-cdn.rebrandly.com/styleguide-assets/icons/ic-color-picker.svg" fill="#909398">
+                  <g id="Page-1" stroke="none" stroke-width="1">
+                      <g id="instabrandly-05" transform="translate(-1277.000000, -667.000000)">
+                          <g id="input-field" transform="translate(1174.000000, 569.000000)">
+                              <g id="Picker-01" transform="translate(103.000000, 28.000000)">
+                                  <path d="M13.7365854,70 C13.1121951,70 12.5658537,70.2341463 12.1756098,70.6243902 L12.1756098,70.6243902 L8.85853659,73.902439 L7.64878049,73.4731707 L6.16585366,74.9560976 L6.98536585,75.7756098 L0.663414634,82.1365854 L0,84.6731707 C0,85.297561 0.663414634,85.9609756 1.28780488,85.9609756 L3.82439024,85.3365854 L10.1853659,78.9756098 L11.004878,79.795122 L12.4878049,78.3121951 L12.0585366,77.102439 L15.297561,73.8634146 L15.297561,73.8634146 C15.6878049,73.4731707 15.9609756,72.8878049 15.9609756,72.302439 C15.9609756,71.0146341 14.9463415,70 13.7365854,70 L13.7365854,70 Z M7.72682927,76.4390244 L9.48292683,78.195122 L3.31707317,84.4 L1.24878049,84.9463415 C1.24878049,84.9463415 1.17073171,84.9073171 1.09268293,84.8292683 C1.01463415,84.7512195 1.01463415,84.7121951 1.01463415,84.7121951 L1.56097561,82.6439024 L7.72682927,76.4390244 Z" id="XMLID_7_-299"></path>
+                              </g>
+                          </g>
+                      </g>
+                  </g>
+              </svg>
+              </span>
+              <input class=" focus:outline-green-600 p-1 w-full" (input)="onFColorChange(foreGroundColor)" [(ngModel)]="foreGroundColor">
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 flex flex-row w-full gap-2">
+          <div class="w-[50%] min-h-[40px]">
+            <p class="text-xs font-semibold mb-2">width</p>
+            <input class="border-2 rounded-md p-1 w-full focus:outline-green-600" [(ngModel)]="width">
+          </div>
+          <div class="w-[50%]  min-h-[40px]">
+            <p class="text-xs font-semibold mb-2">margin</p>
+            <input class="border-2 rounded-md p-1 w-full focus:outline-green-600" [(ngModel)]="margin">
+          </div>
+        </div>
+        <div class="mt-4 flex w-full">
+          <div class="w-[50%] min-h-[40px]">
+            <p class="text-xs font-semibold mb-2">Type</p>
+            <select class="border-2 rounded-md p-1 w-full focus:outline-green-600" [(ngModel)]="type">
+              <option value="img">Image</option>
+              <option value="svg">SVG</option>
+            </select>
+          </div>
+        <a class=" bg-green-800 max-w-[100px] max-h-[36px] mt-auto text-white font-bold p-2 rounded-md mx-auto text-center flex justify-center items-center" [href]="qrCodeDownloadLink" download="qrcode">Download</a>
+
+        </div>
+
+
+        </div>
+        <div>
+
       </div>
     </div>
 

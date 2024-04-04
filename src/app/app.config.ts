@@ -5,17 +5,16 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { HttpClientModule, provideHttpClient,withFetch  } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { NgxCountriesModule } from '@ngx-countries/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withFetch()),
-
     provideRouter(routes),
     provideClientHydration(),
     importProvidersFrom(
       HttpClientModule,
       CookieService,
-
     ),
   ]
 };
