@@ -1,16 +1,14 @@
-import { QRCodeElementType } from './../../../../node_modules/angularx-qrcode/lib/types.d';
 import { ShortUrlService } from './../../services/shortUrl.service';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal, inject, ChangeDetectorRef, HostListener, ViewChild, ElementRef, SecurityContext } from '@angular/core';
 import { HeaderComponent } from '../../shared/header/header.component';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { Url } from '../../interfaces/url';
 import countriesData from '../../../../countries.json';
 import { DatePipe } from '@angular/common';
 import { QRCodeModule } from 'angularx-qrcode';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-import { blob } from 'stream/consumers';
+import { DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import { ColorPickerModule } from 'ngx-color-picker';
 
 
@@ -69,6 +67,8 @@ export default class MainComponent {
     margin = 0
     fileUrl: any;
     src: any;
+    qrCodeBlob: Blob | undefined;
+    qrCodeUrl: string | undefined;
 
     @ViewChild('qrcodeImage', { static: false }) qrcodeImage: ElementRef | undefined;
 
@@ -79,7 +79,7 @@ export default class MainComponent {
 
       enum QRCodeElementType{
         Canvas = 'canvas',
-        Svg = 'svg',
+        Svg = 'svg+xml',
         Url = 'url',
         Img = 'img',
       }
@@ -90,8 +90,6 @@ export default class MainComponent {
     ngOnInit() {
       let ids = this.cookies.get('urls') ? JSON.parse(this.cookies.get('urls')) : [];
       this.getUrlsById(ids);
-
-
 
     }
 
@@ -221,7 +219,30 @@ export default class MainComponent {
         this.qrCodeDownloadLink = url
     }
 
+    downloadQrCode() {
+      try {
+        // Generar el Blob
+        this.qrCodeBlob = new Blob([this.textQr], {type: this.type === 'svg+xml' ? 'image/svg+xml' : 'image/png'});
 
+        // Crear la URL segura para el Blob
+        if (this.qrCodeBlob) {
+          this.qrCodeUrl = URL.createObjectURL(this.qrCodeBlob);
+        }
+
+        // Crear el enlace de descarga
+        if (this.qrCodeDownloadLink) {
+          const a = document.createElement('a');
+          a.href = this.sanitizer.sanitize(SecurityContext.URL, this.qrCodeDownloadLink) as string;
+          a.download = 'qrcode';
+          a.click();
+          a.remove();
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+
+
+    }
 
     startStat(url: Url){
       this.statBool.set(true)

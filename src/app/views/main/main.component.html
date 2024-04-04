@@ -182,7 +182,9 @@
               <option value="svg">SVG</option>
             </select>
           </div>
-        <a class=" bg-green-800 max-w-[100px] max-h-[36px] mt-auto text-white font-bold p-2 rounded-md mx-auto text-center flex justify-center items-center" [href]="qrCodeDownloadLink" download="qrcode">Download</a>
+          <button class="bg-green-800 min-w-[100px] min-h-[36px] mt-auto text-white font-bold p-2 rounded-md mx-auto text-center flex justify-center items-center" (click)="downloadQrCode()" type="button">Download</button>
+
+
 
         </div>
 
