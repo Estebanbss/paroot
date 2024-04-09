@@ -1,27 +1,39 @@
 # Paroot
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
+Paroot is a web application that allows you to shorten links and generate QR codes quickly and easily. With Paroot, you can simplify long URLs and create custom QR codes with just a few clicks.
 
-## Development server
+![forthebadge](https://github.com/Estebanbss/paroot/blob/master/.github/workflows/paroot.gif)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Link Shortening**: Convert long URLs into shorter links with a single click.
+- **QR Code Generation**: Create custom QR codes for your shortened links.
+- **Link Statistics**: Get detailed information about the activity of your shortened links, including clicks, location, and the date of the last visit.
 
-## Build
+## Usage
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. **Shorten a Link**:
+   - Enter a long URL into the provided field.
+   - Click the "Shorten URL" button to generate a shorter link.
+   - Copy the new shortened link and share it wherever you like.
 
-## Running unit tests
+2. **Generate a QR Code**:
+   - Select the "Generate QR Code" option in the navigation bar.
+   - Enter the text or URL you want to encode in the QR code.
+   - Customize the background and foreground colors according to your preferences.
+   - Download the generated QR code and use it as needed.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3. **View Link Statistics**:
+   - Click the statistics button next to a shortened link to view detailed information.
+   - Get data on the number of clicks, creation date, and visitor location.
 
-## Running end-to-end tests
+## Technologies Used
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- **Frontend**: HTML, CSS, Typescript
+- **Backend**: C#, Entity framework Core
+- **Frameworks & Libraries**: Angular, SVG, Tailwind CSS
 
-## Further help
+## Contribution
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Contributions are welcome! If you'd like to improve Paroot or add new features, feel free to submit a pull request.
